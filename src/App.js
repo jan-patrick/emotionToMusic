@@ -6,11 +6,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Palette';
 import Red from "./Red";
 import Green from "./Green";
 import Blue from "./Blue";
+import Result from "./Result";
 
 import './App.css';
 
@@ -73,6 +75,7 @@ class App extends Component {
               <Route path="/red" component={Red} />
               <Route path="/green" component={Green} />
               <Route path="/blue" component={Blue} />
+              <Route path="/result" component={Result} />
             </Switch>
           </BrowserRouter>
         </React.Fragment>
@@ -84,11 +87,13 @@ class App extends Component {
 //Home component
 const Home = props => (
   <div className="home">
-    <Link to="/red" style={{ textDecoration: 'none', color: 'black' }}>
-      <Button variant="fab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%'}} fontSize="large">
-        <AddIcon className="add"/>
-      </Button>
-    </Link>
+    <Slide direction="left" in="true" mountOnEnter unmountOnExit>
+      <Link to="/red" style={{ textDecoration: 'none', color: 'black' }}>
+        <Button variant="fab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%' }} fontSize="large">
+          <AddIcon className="add" />
+        </Button>
+      </Link>
+    </Slide>
   </div>
 );
 

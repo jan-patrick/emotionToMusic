@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import Slide from '@material-ui/core/Slide';
 import screen from './screens/Green.svg';
-import { Events, animateScroll as scroll} from 'react-scroll'
+import { Events, animateScroll as scroll} from 'react-scroll';
 
 
 const divStyle = {
@@ -30,8 +30,24 @@ class Color extends React.Component {
     Events.scrollEvent.register('end', function () {
       console.log("end", arguments);
     });
+    window.addEventListener('scroll', this.handleScroll);
   }
 
+  handleScroll() {
+
+    let supportPageOffset = window.pageXOffset !== undefined;
+    let isCSS1Compat = ((document.compatMode || '') === 'CSS1Compat');
+    let scroll = {
+       x: supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft,
+       y: supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop
+    };
+    var body = document.body;
+    var html = document.documentElement;
+    var docHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )-window.innerHeight+1;
+    var percent = scroll.y/docHeight;
+    percent = Math.min(1,Math.max(percent, 0))*100;
+    console.log(percent);
+ }
 
   render() {
     //var winHeight = window.innerHeight;

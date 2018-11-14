@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import Slide from '@material-ui/core/Slide';
 import screen from './screens/Red.svg';
-import { Events, animateScroll as scroll} from 'react-scroll'
+import { Events, animateScroll as scroll} from 'react-scroll';
 
 
 const divStyle = {
