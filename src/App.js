@@ -8,13 +8,15 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
+import { Events, animateScroll as scroll} from 'react-scroll';
 import AddIcon from '@material-ui/icons/Palette';
-import Red from "./Red";
+import redScreen from './screens/Red.svg';
 import Green from "./Green";
 import Blue from "./Blue";
 import Result from "./Result";
 import './App.css';
 
+var percent = 25;
 var synth = new Tone.Synth({
   "oscillator": {
     "type": "pwm",
@@ -47,17 +49,37 @@ class App extends Component {
     activeStep: 0,
   };
 
-  handleNext = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep + 1,
-    }));
-  };
+  
+  componentDidMount() {
+    scroll.scrollMore(3500)
 
-  handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1,
-    }));
-  };
+    Events.scrollEvent.register('begin', function () {
+      console.log("begin", arguments);
+    });
+
+    Events.scrollEvent.register('end', function () {
+      console.log("end", arguments);
+    });
+
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll() {
+
+    let supportPageOffset = window.pageXOffset !== undefined;
+    let isCSS1Compat = ((document.compatMode || '') === 'CSS1Compat');
+    let scroll = {
+       x: supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft,
+       y: supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop
+    };
+    var body = document.body;
+    var html = document.documentElement;
+    var docHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )-window.innerHeight+1;
+    percent = scroll.y/docHeight;
+    percent = Math.min(1,Math.max(percent, 0))*100;
+    console.log(percent)
+  }
+
   render() {
     //const { classes, theme } = this.props;
     return (
@@ -94,6 +116,16 @@ const Home = props => (
       </Link>
     </Slide>
   </div>
+);
+
+//Red component
+const Red = props => (
+  <div>
+        <Slide direction="left" in="true" mountOnEnter unmountOnExit>
+          <p><Link to="/green" style={{ textDecoration: 'none', color: 'black' }}><img src={redScreen} alt="First" />
+          </Link></p>
+        </Slide>
+      </div>
 );
 
 App.propTypes = {
