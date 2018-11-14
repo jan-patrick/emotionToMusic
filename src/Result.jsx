@@ -4,13 +4,18 @@ import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import RedoIcon from '@material-ui/icons/Replay';
 
+var body = document.body;
+    var html = document.documentElement;
+    var docHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
 
 const divStyle = {
   margin: `none`,
   padding: `none`,
+  backgroundColor: `rgb(219,223,3)`,
+  height: docHeight,
 }
 
-class Color extends React.Component {
+class Result extends React.Component {
 
   constructor() {
     super();
@@ -34,4 +39,4 @@ class Color extends React.Component {
   }
 }
 
-export default Color;
+export default Result;
