@@ -8,11 +8,11 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
-import { Events, animateScroll as scroll} from 'react-scroll';
+import { Events, animateScroll as scroll } from 'react-scroll';
 import AddIcon from '@material-ui/icons/Palette';
 import redScreen from './screens/Red.svg';
-import Green from "./Green";
-import Blue from "./Blue";
+import greenScreen from './screens/Green.svg';
+import blueScreen from './screens/Blue.svg';
 import Result from "./Result";
 import './App.css';
 
@@ -49,7 +49,7 @@ class App extends Component {
     activeStep: 0,
   };
 
-  
+
   componentDidMount() {
     scroll.scrollMore(3500)
 
@@ -69,14 +69,14 @@ class App extends Component {
     let supportPageOffset = window.pageXOffset !== undefined;
     let isCSS1Compat = ((document.compatMode || '') === 'CSS1Compat');
     let scroll = {
-       x: supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft,
-       y: supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop
+      x: supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft,
+      y: supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop
     };
     var body = document.body;
     var html = document.documentElement;
-    var docHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )-window.innerHeight+1;
-    percent = scroll.y/docHeight;
-    percent = Math.min(1,Math.max(percent, 0))*100;
+    var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - window.innerHeight + 1;
+    percent = scroll.y / docHeight;
+    percent = Math.min(1, Math.max(percent, 0)) * 100;
     console.log(percent)
   }
 
@@ -120,12 +120,29 @@ const Home = props => (
 
 //Red component
 const Red = props => (
-  <div>
-        <Slide direction="left" in="true" mountOnEnter unmountOnExit>
-          <p><Link to="/green" style={{ textDecoration: 'none', color: 'black' }}><img src={redScreen} alt="First" />
-          </Link></p>
-        </Slide>
-      </div>
+  <div className="red"  onLoad={scroll.scrollMore(4700)}>
+    <Slide direction="left" in="true" mountOnEnter unmountOnExit>
+      <p><Link to="/green" style={{ textDecoration: 'none', color: 'black' }}><img src={redScreen} alt="Red" /></Link></p>
+    </Slide>
+  </div>
+);
+
+//Green component
+const Green = props => (
+  <div className="green" onLoad={scroll.scrollMore(4700)}>
+    <Slide direction="left" in="true" mountOnEnter unmountOnExit>
+      <p><Link to="/blue" style={{ textDecoration: 'none', color: 'black' }}><img src={greenScreen} alt="First" /></Link></p>
+    </Slide>
+  </div>
+);
+
+//Green component
+const Blue = props => (
+  <div className="blue" onLoad={scroll.scrollMore(4700)}>
+    <Slide direction="left" in="true" mountOnEnter unmountOnExit>
+      <p><Link to="/result" style={{ textDecoration: 'none', color: 'black' }}><img src={blueScreen} alt="First" /></Link></p>
+    </Slide>
+  </div>
 );
 
 App.propTypes = {
