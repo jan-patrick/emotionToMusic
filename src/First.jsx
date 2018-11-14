@@ -5,7 +5,8 @@ import screen from './screens/First.svg';
 
 const divStyle = {
   backgroundImage: `url(${screen})`,
-
+  margin: `none`,
+  padding: `none`,
 }
 
 class Color extends React.Component {
