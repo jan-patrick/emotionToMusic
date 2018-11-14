@@ -6,7 +6,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
-import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Palette';
 import Red from "./Red";
@@ -59,7 +58,7 @@ class App extends Component {
     }));
   };
   render() {
-    const { classes, theme } = this.props;
+    //const { classes, theme } = this.props;
     return (
       <div className="App">
         <React.Fragment>
@@ -76,25 +75,6 @@ class App extends Component {
               <Route path="/blue" component={Blue} />
             </Switch>
           </BrowserRouter>
-        <MobileStepper
-        variant="progress"
-        steps={4}
-        position="static"
-        activeStep={this.state.activeStep}
-        className={classes.root}
-        nextButton={
-          <Button size="small" onClick={this.handleNext} disabled={this.state.activeStep === 5}>
-            Next
-            {theme.direction === 'rtl' ? <AddIcon /> : <AddIcon />}
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={this.handleBack} disabled={this.state.activeStep === 0}>
-            {theme.direction === 'rtl' ? <AddIcon /> : <AddIcon />}
-            Back
-          </Button>
-        }
-      />
         </React.Fragment>
       </div >
     );
@@ -105,7 +85,7 @@ class App extends Component {
 const Home = props => (
   <div className="home">
     <Link to="/red" style={{ textDecoration: 'none', color: 'black' }}>
-      <Button variant="fab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%'}}>
+      <Button variant="fab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%'}} fontSize="large">
         <AddIcon className="add"/>
       </Button>
     </Link>
