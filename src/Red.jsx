@@ -4,7 +4,7 @@ import Slide from '@material-ui/core/Slide';
 import screen from './screens/Red.svg';
 import { Events, animateScroll as scroll} from 'react-scroll';
 
-
+var percent = 25;
 const divStyle = {
   backgroundImage: `url(${screen})`,
   margin: `none`,
@@ -45,7 +45,7 @@ class Color extends React.Component {
     var body = document.body;
     var html = document.documentElement;
     var docHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )-window.innerHeight+1;
-    var percent = scroll.y/docHeight;
+    percent = scroll.y/docHeight;
     percent = Math.min(1,Math.max(percent, 0))*100;
     console.log(percent);
  }
@@ -61,5 +61,9 @@ class Color extends React.Component {
     )
   }
 }
+
+export const redResult = {
+  r: percent,
+};
 
 export default Color;

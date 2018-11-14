@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import RedoIcon from '@material-ui/icons/Replay';
+import {redResult} from './Red';
 
 var body = document.body;
-    var html = document.documentElement;
-    var docHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+var html = document.documentElement;
+var docHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
 
 const divStyle = {
   margin: `none`,
   padding: `none`,
-  backgroundColor: `rgb(219,223,3)`,
+  backgroundColor: "rgb("+redResult.r+",255,0)",
   height: docHeight,
 }
 

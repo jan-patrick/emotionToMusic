@@ -13,7 +13,6 @@ import Red from "./Red";
 import Green from "./Green";
 import Blue from "./Blue";
 import Result from "./Result";
-
 import './App.css';
 
 var synth = new Tone.Synth({
