@@ -3,26 +3,26 @@ import 'typeface-roboto';
 import Tone from 'tone';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import First from "./First";
-import Second from "./Second";
+import Red from "./Red";
+import Green from "./Green";
+import Blue from "./Blue";
 
 import './App.css';
 
 var synth = new Tone.Synth({
-  "oscillator" : {
-      "type" : "pwm",
-      "modulationFrequency" : 0.2
+  "oscillator": {
+    "type": "pwm",
+    "modulationFrequency": 0.2
   },
-  "envelope" : {
-      "attack" : 0.02,
-      "decay" : 0.1,
-      "sustain" : 0.2,
-      "release" : 0.9,
+  "envelope": {
+    "attack": 0.02,
+    "decay": 0.1,
+    "sustain": 0.2,
+    "release": 0.9,
   }
 }).toMaster();
 var polySynth = new Tone.PolySynth(4, Tone.Synth).toMaster();
@@ -50,27 +50,16 @@ class App extends Component {
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
           />
-          <Grid
-            container
-            spacing={16}
-            className="App"
-            direction="row"
-            justify="center"
-            alignItems="flex-start">
-            <Grid item xs={12}>
-              <Grid key="switch" item>
-              <BrowserRouter>
-                <Switch>
-                  <Route path="/01" component={First} />
-                  <Route exact path="/" component={Home} />
-                  <Route path="/02" component={Second} />
-                </Switch>
-              </BrowserRouter>
-              </Grid>
-            </Grid>
-          </Grid>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/red" component={Red} />
+              <Route path="/green" component={Green} />
+              <Route path="/blue" component={Blue} />
+            </Switch>
+          </BrowserRouter>
         </React.Fragment>
-      </div>
+      </div >
     );
   }
 }
@@ -78,8 +67,9 @@ class App extends Component {
 //Home component
 const Home = props => (
   <div className="home">
-    <Link to="/01" style={{ textDecoration: 'none', color: 'black' }}>
-    <Button variant="extendedFab" aria-label="Delete" className="button">
+    <Link to="/red" style={{ textDecoration: 'none', color: 'black' }}>
+    <p><br/><br/><br/><br/><br/><br/><br/><p><br/><br/><br/><br/><br/><br/><br/></p><p><br/><br/><br/><br/><br/><br/><br/></p></p>
+      <Button variant="extendedFab" aria-label="Delete" className="button">
         <AddIcon className="test" />
         Start
       </Button>

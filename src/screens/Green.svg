@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 50000">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Green);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="lime" stop-opacity="0"/>
+      <stop offset="1" stop-color="lime"/>
+    </linearGradient>
+    <clipPath id="clip-Green">
+      <rect width="1440" height="50000"/>
+    </clipPath>
+  </defs>
+  <g id="Green" class="cls-1">
+    <rect class="cls-3" width="1440" height="50000"/>
+    <rect id="Rechteck_3" data-name="Rechteck 3" class="cls-2" width="1440" height="50000" transform="translate(5)"/>
+  </g>
+</svg>
