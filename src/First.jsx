@@ -1,8 +1,12 @@
 import React from 'react';
-import Fade from '@material-ui/core/Fade';
 import { Link } from "react-router-dom";
+import Slide from '@material-ui/core/Slide';
+import screen from './screens/First.svg';
 
+const divStyle = {
+  backgroundImage: `url(${screen})`,
 
+}
 
 class Color extends React.Component {
 
@@ -16,10 +20,11 @@ class Color extends React.Component {
   render() {
 
     return (
-      <div>
-        <Fade in='true'>
-        <p><Link to="/" style={{ textDecoration: 'none', color: 'black' }}>Home</Link></p>
-        </Fade>
+      <div style={divStyle} >
+        <Slide  direction="left" in="true" mountOnEnter unmountOnExit>
+        <p><Link to="/" style={{ textDecoration: 'none', color: 'black' }}><img  src={screen} alt="First"/>
+</Link></p>
+        </Slide>
       </div>
     )
   }
