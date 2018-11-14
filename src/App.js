@@ -10,13 +10,16 @@ import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import { Events, animateScroll as scroll } from 'react-scroll';
 import AddIcon from '@material-ui/icons/Palette';
+import RedoIcon from '@material-ui/icons/Replay';
 import redScreen from './screens/Red.svg';
 import greenScreen from './screens/Green.svg';
 import blueScreen from './screens/Blue.svg';
-import Result from "./Result";
 import './App.css';
 
 var percent = 25;
+var body = document.body;
+var html = document.documentElement;
+var documentHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
 var synth = new Tone.Synth({
   "oscillator": {
     "type": "pwm",
@@ -51,8 +54,6 @@ class App extends Component {
 
 
   componentDidMount() {
-    scroll.scrollMore(3500)
-
     Events.scrollEvent.register('begin', function () {
       console.log("begin", arguments);
     });
@@ -120,7 +121,7 @@ const Home = props => (
 
 //Red component
 const Red = props => (
-  <div className="red"  onLoad={scroll.scrollMore(4700)}>
+  <div className="red" onLoad={scroll.scrollMore(4700)}>
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
       <p><Link to="/green" style={{ textDecoration: 'none', color: 'black' }}><img src={redScreen} alt="Red" /></Link></p>
     </Slide>
@@ -141,6 +142,19 @@ const Blue = props => (
   <div className="blue" onLoad={scroll.scrollMore(4700)}>
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
       <p><Link to="/result" style={{ textDecoration: 'none', color: 'black' }}><img src={blueScreen} alt="First" /></Link></p>
+    </Slide>
+  </div>
+);
+
+//Result component
+const Result = props => (
+  <div style={{ backgroundColor: "rgb(200,255,0)", height: documentHeight }}>
+    <Slide direction="left" in="true" mountOnEnter unmountOnExit>
+      <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
+        <Button variant="fab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%' }} fontSize="large">
+          <RedoIcon className="redo" />
+        </Button>
+      </Link>
     </Slide>
   </div>
 );
