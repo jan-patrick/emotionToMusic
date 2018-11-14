@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import Slide from '@material-ui/core/Slide';
 import screen from './screens/Blue.svg';
+import { Events, animateScroll as scroll} from 'react-scroll'
+
 
 const divStyle = {
   backgroundImage: `url(${screen})`,
@@ -16,6 +18,18 @@ class Color extends React.Component {
     this.state = {
       redirectToReferrer: false
     }
+  }
+
+  componentDidMount() {
+    scroll.scrollMore(3500)
+
+    Events.scrollEvent.register('begin', function () {
+      console.log("begin", arguments);
+    });
+
+    Events.scrollEvent.register('end', function () {
+      console.log("end", arguments);
+    });
   }
 
   render() {
