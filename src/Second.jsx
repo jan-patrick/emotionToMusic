@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import Slide from '@material-ui/core/Slide';
-import screen from './screens/First.svg';
+import screen from './screens/Second.svg';
 
 const divStyle = {
   backgroundImage: `url(${screen})`,
@@ -26,7 +26,7 @@ console.log(top);
     return (
       <div style={divStyle} >
         <Slide  direction="left" in="true" mountOnEnter unmountOnExit>
-        <p><Link to="/02" style={{ textDecoration: 'none', color: 'black' }}><img  src={screen} alt="First"/>
+        <p><Link to="/" style={{ textDecoration: 'none', color: 'black' }}><img  src={screen} alt="First"/>
 </Link></p>
         </Slide>
       </div>

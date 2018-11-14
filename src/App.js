@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import First from "./First";
+import Second from "./Second";
 
 import './App.css';
 
@@ -34,10 +35,9 @@ polySynth.triggerAttack(["C4", "E4", "G4", "B4"], "2n");
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
-    alignSelf:'center',
   },
   extendedIcon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing.unit + 90,
   },
 });
 class App extends Component {
@@ -63,6 +63,7 @@ class App extends Component {
                 <Switch>
                   <Route path="/01" component={First} />
                   <Route exact path="/" component={Home} />
+                  <Route path="/02" component={Second} />
                 </Switch>
               </BrowserRouter>
               </Grid>
@@ -80,7 +81,7 @@ const Home = props => (
     <Link to="/01" style={{ textDecoration: 'none', color: 'black' }}>
     <Button variant="extendedFab" aria-label="Delete" className="button">
         <AddIcon className="test" />
-           Start
+        Start
       </Button>
     </Link>
   </div>
