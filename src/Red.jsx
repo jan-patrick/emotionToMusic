@@ -45,7 +45,9 @@ class Color extends React.Component {
     var body = document.body;
     var html = document.documentElement;
     var docHeight = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight )-window.innerHeight+1;
-    console.log(scroll.y + " : " + docHeight);
+    var percent = scroll.y/docHeight;
+    percent = Math.min(1,Math.max(percent, 0))*100;
+    console.log(percent);
  }
 
   render() {
