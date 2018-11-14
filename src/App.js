@@ -5,8 +5,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
+//import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from '@material-ui/icons/Palette';
 import Red from "./Red";
 import Green from "./Green";
 import Blue from "./Blue";
@@ -37,7 +38,7 @@ const styles = theme => ({
     margin: theme.spacing.unit,
   },
   extendedIcon: {
-    marginRight: theme.spacing.unit + 90,
+    marginRight: theme.spacing.unit,
   },
 });
 class App extends Component {
@@ -68,10 +69,8 @@ class App extends Component {
 const Home = props => (
   <div className="home">
     <Link to="/red" style={{ textDecoration: 'none', color: 'black' }}>
-    <p><br/><br/><br/><br/><br/><br/><br/><p><br/><br/><br/><br/><br/><br/><br/></p><p><br/><br/><br/><br/><br/><br/><br/></p></p>
-      <Button variant="extendedFab" aria-label="Delete" className="button">
-        <AddIcon className="test" />
-        Start
+      <Button variant="fab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%'}}>
+        <AddIcon className="add"/>
       </Button>
     </Link>
   </div>
