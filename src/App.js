@@ -48,9 +48,18 @@ const styles = theme => ({
   },
 });
 class App extends Component {
-  state = {
-    activeStep: 0,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeStep: 0,
+      red: 0,
+      green: 0,
+      blue: 0,
+      actualPath: 'none',
+    }
+    this.handleScroll = this.handleScroll.bind(this);
+    this.handleSites = this.handleSites.bind(this);
+  }
 
 
   componentDidMount() {
@@ -66,6 +75,7 @@ class App extends Component {
   }
 
   handleScroll() {
+    const { actualPath } = this.state;
 
     let supportPageOffset = window.pageXOffset !== undefined;
     let isCSS1Compat = ((document.compatMode || '') === 'CSS1Compat');
@@ -78,11 +88,19 @@ class App extends Component {
     var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - window.innerHeight + 1;
     percent = scroll.y / docHeight;
     percent = Math.min(1, Math.max(percent, 0)) * 100;
-    console.log(percent)
+    console.log(percent);
+    console.log(actualPath);
+  }
+
+  handleSites = param => e => {
+    if (param === 'red') {
+      this.setState({ actualPath: 'red' });
+    } else {
+      this.setState({ actualPath: 'none' });
+    }
   }
 
   render() {
-    //const { classes, theme } = this.props;
     return (
       <div className="App">
         <React.Fragment>
@@ -93,7 +111,7 @@ class App extends Component {
           />
           <BrowserRouter>
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={Home} onLoad={this.handleSites('red')}/>
               <Route path="/red" component={Red} />
               <Route path="/green" component={Green} />
               <Route path="/blue" component={Blue} />
