@@ -18,6 +18,9 @@ import './App.css';
 
 var percent = 25;
 var actualPath = 0;
+var red = 0;
+var green = 0;
+var blue = 0;
 var body = document.body;
 var html = document.documentElement;
 var documentHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
@@ -53,9 +56,6 @@ class App extends Component {
     super(props);
     this.state = {
       activeStep: 0,
-      red: 0,
-      green: 0,
-      blue: 0,
     }
     this.handleScroll = this.handleScroll.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
@@ -70,7 +70,7 @@ class App extends Component {
     Events.scrollEvent.register('end', function () {
       console.log("end", arguments);
       actualPath++;
-      if(actualPath>=3 || actualPath < 0){
+      if(actualPath>=4 || actualPath < 0){
         actualPath = 0;
       }
     });
@@ -98,6 +98,13 @@ class App extends Component {
     percent = Math.min(1, Math.max(percent, 0)) * 100;
     console.log(percent);
     console.log(actualPath);
+    if(actualPath===1){
+      red = percent;
+    } else if(actualPath===2){
+      green = percent;
+    } else if(actualPath===3){
+      blue = percent;
+    }
   }
 
   handleClickShowPassword = () => {
@@ -170,7 +177,7 @@ const Blue = props => (
 
 //Result component
 const Result = props => (
-  <div style={{ backgroundColor: "rgb(200,255,0)", height: documentHeight }}>
+  <div style={{ backgroundColor: "rgb("+red+","+green+","+blue+")", height: documentHeight }}>
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
       <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
         <Button variant="fab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%' }} fontSize="large">
