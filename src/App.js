@@ -99,12 +99,16 @@ class App extends Component {
     console.log(percent);
     console.log(actualPath);
     if(actualPath===1){
-      red = percent;
+      red = this.scale(percent, 0, 100, 255, 0);
     } else if(actualPath===2){
-      green = percent;
+      green = this.scale(percent, 0, 100, 255, 0);
     } else if(actualPath===3){
-      blue = percent;
+      blue = this.scale(percent, 0, 100, 255, 0);
     }
+  }
+
+  scale = (num, in_min, in_max, out_min, out_max) => {
+    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
 
   handleClickShowPassword = () => {
