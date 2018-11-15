@@ -95,16 +95,19 @@ class App extends Component {
     var html = document.documentElement;
     var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - window.innerHeight + 1;
     percent = scroll.y / docHeight;
-    percent = Math.min(1, Math.max(percent, 0)) * 100;
+    percent = Math.round((Math.min(1, Math.max(percent, 0)) * 100)-100)*-1;
     console.log(percent);
     console.log(actualPath);
+   // if(listenScroll){
     if(actualPath===1){
-      red = this.scale(percent, 0, 100, 255, 0);
+      red = this.scale(percent, 0, 100, 0, 255);
     } else if(actualPath===2){
-      green = this.scale(percent, 0, 100, 255, 0);
+      green = this.scale(percent, 0, 100, 0, 255);
     } else if(actualPath===3){
-      blue = this.scale(percent, 0, 100, 255, 0);
+      blue = this.scale(percent, 0, 100, 0, 255);
     }
+    console.log(red+":"+green+":"+blue);
+ // }
   }
 
   scale = (num, in_min, in_max, out_min, out_max) => {
