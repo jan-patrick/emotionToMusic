@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import { Events, animateScroll as scroll } from 'react-scroll';
-import AddIcon from '@material-ui/icons/Palette';
+import AddIcon from '@material-ui/icons/MusicNote';
 import RedoIcon from '@material-ui/icons/Replay';
 import redScreen from './screens/Red.svg';
 import greenScreen from './screens/Green.svg';
@@ -21,27 +21,15 @@ var actualPath = 0;
 var red = 0;
 var green = 0;
 var blue = 0;
+var trackScrollNow = false;
 var body = document.body;
 var html = document.documentElement;
+const standardSound = 100;
+var redSound = standardSound;
+var greenSound = redSound;
+var blueSound = greenSound;
 var documentHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-var synth = new Tone.Synth({
-  "oscillator": {
-    "type": "pwm",
-    "modulationFrequency": 0.2
-  },
-  "envelope": {
-    "attack": 0.02,
-    "decay": 0.1,
-    "sustain": 0.2,
-    "release": 0.9,
-  }
-}).toMaster();
-var polySynth = new Tone.PolySynth(4, Tone.Synth).toMaster();
-
-//start the note "D3" one second from now
-synth.triggerAttack("C4", "2n");
-polySynth.triggerAttack(["C4", "E4", "G4", "B4"], "2n");
-
+var polySynth = new Tone.PolySynth(3, Tone.Synth).toMaster();
 
 const styles = theme => ({
   button: {
@@ -69,12 +57,16 @@ class App extends Component {
 
     Events.scrollEvent.register('end', function () {
       console.log("end", arguments);
+      trackScrollNow = false;
       actualPath++;
-      if(actualPath>=4 || actualPath < 1){
+      if (actualPath >= 4 || actualPath < 1) {
         actualPath = 1;
+        redSound = standardSound;
+        greenSound = standardSound;
+        blueSound = standardSound;
       }
+      trackScrollNow = true;
     });
-
     window.addEventListener('scroll', this.handleScroll);
   }
 
@@ -95,19 +87,21 @@ class App extends Component {
     var html = document.documentElement;
     var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - window.innerHeight + 1;
     percent = scroll.y / docHeight;
-    percent = Math.round((Math.min(1, Math.max(percent, 0)) * 100)-100)*-1;
-    console.log(percent);
-    console.log(actualPath);
-   // if(listenScroll){
-    if(actualPath===1){
-      red = this.scale(percent, 0, 100, 0, 255);
-    } else if(actualPath===2){
-      green = this.scale(percent, 0, 100, 0, 255);
-    } else if(actualPath===3){
-      blue = this.scale(percent, 0, 100, 0, 255);
+    percent = Math.round((Math.min(1, Math.max(percent, 0)) * 100) - 100) * -1;
+    if (trackScrollNow) {
+      if (actualPath === 1) {
+        red = this.scale(percent, 0, 100, 0, 255);
+        redSound = this.scale(percent, 0, 100, 100, 1000);
+      } else if (actualPath === 2) {
+        green = this.scale(percent, 0, 100, 0, 255);
+        greenSound = this.scale(percent, 0, 100, 100, 1000);
+      } else if (actualPath === 3) {
+        blue = this.scale(percent, 0, 100, 0, 255);
+        blueSound = this.scale(percent, 0, 100, 100, 1000);
+      }
     }
-    console.log(red+":"+green+":"+blue);
- // }
+    console.log("C" + red + ":" + green + ":" + blue);
+    console.log("S" + redSound + ":" + greenSound + ":" + blueSound);
   }
 
   scale = (num, in_min, in_max, out_min, out_max) => {
@@ -119,6 +113,8 @@ class App extends Component {
   };
 
   render() {
+    polySynth.triggerAttack([redSound, greenSound, blueSound], "2n");
+    Tone.Master.volume.rampTo(0, 0.05);
     return (
       <div className="App">
         <React.Fragment>
@@ -129,7 +125,7 @@ class App extends Component {
           />
           <BrowserRouter>
             <Switch>
-              <Route exact path="/" component={Home}/>
+              <Route exact path="/" component={Home} />
               <Route path="/red" component={Red} />
               <Route path="/green" component={Green} />
               <Route path="/blue" component={Blue} />
@@ -142,7 +138,7 @@ class App extends Component {
   }
 }
 
-//Home component
+//Home component 
 const Home = props => (
   <div className="home">
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
@@ -157,7 +153,7 @@ const Home = props => (
 
 //Red component
 const Red = props => (
-  <div className="red" onLoad={scroll.scrollMore(4700)}>
+  <div className="red" onLoad={function (event) { scroll.scrollMore(4700); trackScrollNow = false }}>
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
       <p><Link to="/green" style={{ textDecoration: 'none', color: 'black' }}><img src={redScreen} alt="Red" /></Link></p>
     </Slide>
@@ -166,7 +162,7 @@ const Red = props => (
 
 //Green component
 const Green = props => (
-  <div className="green" onLoad={scroll.scrollMore(4700)}>
+  <div className="green" onLoad={function (event) { scroll.scrollMore(4700); trackScrollNow = false }}>
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
       <p><Link to="/blue" style={{ textDecoration: 'none', color: 'black' }}><img src={greenScreen} alt="Green" /></Link></p>
     </Slide>
@@ -175,7 +171,7 @@ const Green = props => (
 
 //Blue component
 const Blue = props => (
-  <div className="blue" onLoad={scroll.scrollMore(4700)}>
+  <div className="blue" onLoad={function (event) { scroll.scrollMore(4700); trackScrollNow = false }}>
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
       <p><Link to="/result" style={{ textDecoration: 'none', color: 'black' }}><img src={blueScreen} alt="Blue" /></Link></p>
     </Slide>
@@ -184,9 +180,9 @@ const Blue = props => (
 
 //Result component
 const Result = props => (
-  <div style={{ backgroundColor: "rgb("+red+","+green+","+blue+")", height: documentHeight }}>
+  <div style={{ backgroundColor: "rgb(" + red + "," + green + "," + blue + ")", height: documentHeight }}>
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
-      <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
+      <Link to="/red" style={{ textDecoration: 'none', color: 'black' }}>
         <Button variant="fab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%' }} fontSize="large">
           <RedoIcon className="redo" />
         </Button>
