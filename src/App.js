@@ -70,8 +70,8 @@ class App extends Component {
     Events.scrollEvent.register('end', function () {
       console.log("end", arguments);
       actualPath++;
-      if(actualPath>=4 || actualPath < 0){
-        actualPath = 0;
+      if(actualPath>=4 || actualPath < 1){
+        actualPath = 1;
       }
     });
 
