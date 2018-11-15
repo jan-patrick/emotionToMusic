@@ -98,8 +98,8 @@ class App extends Component {
         blueSound = this.scale(percent, 0, 100, 100, 1000);
       }
     }
-    console.log("C" + red + ":" + green + ":" + blue);
-    console.log("S" + redSound + ":" + greenSound + ":" + blueSound);
+    //console.log("C" + red + ":" + green + ":" + blue);
+    //console.log("S" + redSound + ":" + greenSound + ":" + blueSound);
   }
 
   scale = (num, in_min, in_max, out_min, out_max) => {
