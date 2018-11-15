@@ -9,8 +9,6 @@ import { Link } from "react-router-dom";
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import { Events, animateScroll as scroll } from 'react-scroll';
-import AddIcon from '@material-ui/icons/MusicNote';
-import RedoIcon from '@material-ui/icons/Replay';
 import redScreen from './screens/Red.svg';
 import greenScreen from './screens/Green.svg';
 import blueScreen from './screens/Blue.svg';
@@ -26,8 +24,8 @@ var body = document.body;
 var html = document.documentElement;
 const standardSound = 100;
 var redSound = standardSound;
-var greenSound = redSound;
-var blueSound = greenSound;
+var greenSound = 200;
+var blueSound = 150;
 var documentHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
 var polySynth = new Tone.PolySynth(3, Tone.Synth).toMaster();
 
@@ -143,8 +141,8 @@ const Home = props => (
   <div className="home">
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
       <Link to="/red" style={{ textDecoration: 'none', color: 'black' }}>
-        <Button variant="fab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%' }} fontSize="large">
-          <AddIcon className="add" />
+        <Button variant="extendedfab" color="black" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%', color: '#FFFFFF',backgroundColor: '#000000'}} fontSize="large">
+          create
         </Button>
       </Link>
     </Slide>
@@ -183,8 +181,8 @@ const Result = props => (
   <div style={{ backgroundColor: "rgb(" + red + "," + green + "," + blue + ")", height: documentHeight }}>
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
       <Link to="/red" style={{ textDecoration: 'none', color: 'black' }}>
-        <Button variant="fab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%' }} fontSize="large">
-          <RedoIcon className="redo" />
+        <Button variant="extendedfab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%', color: '#FFFFFF', backgroundColor: '#000000'}} fontSize="large">
+          rgb({red}, {green}, {blue})
         </Button>
       </Link>
     </Slide>
