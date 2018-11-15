@@ -17,6 +17,7 @@ import blueScreen from './screens/Blue.svg';
 import './App.css';
 
 var percent = 25;
+var actualPath = 0;
 var body = document.body;
 var html = document.documentElement;
 var documentHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
@@ -55,10 +56,9 @@ class App extends Component {
       red: 0,
       green: 0,
       blue: 0,
-      actualPath: 'none',
     }
     this.handleScroll = this.handleScroll.bind(this);
-    this.handleSites = this.handleSites.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
 
@@ -69,13 +69,21 @@ class App extends Component {
 
     Events.scrollEvent.register('end', function () {
       console.log("end", arguments);
+      actualPath++;
+      if(actualPath>=3 || actualPath < 0){
+        actualPath = 0;
+      }
     });
 
     window.addEventListener('scroll', this.handleScroll);
   }
 
+  componentWillUnmount() {
+    Events.scrollEvent.remove('begin');
+    Events.scrollEvent.remove('end');
+  }
+
   handleScroll() {
-    const { actualPath } = this.state;
 
     let supportPageOffset = window.pageXOffset !== undefined;
     let isCSS1Compat = ((document.compatMode || '') === 'CSS1Compat');
@@ -92,13 +100,9 @@ class App extends Component {
     console.log(actualPath);
   }
 
-  handleSites = param => e => {
-    if (param === 'red') {
-      this.setState({ actualPath: 'red' });
-    } else {
-      this.setState({ actualPath: 'none' });
-    }
-  }
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+  };
 
   render() {
     return (
@@ -111,7 +115,7 @@ class App extends Component {
           />
           <BrowserRouter>
             <Switch>
-              <Route exact path="/" component={Home} onLoad={this.handleSites('red')}/>
+              <Route exact path="/" component={Home}/>
               <Route path="/red" component={Red} />
               <Route path="/green" component={Green} />
               <Route path="/blue" component={Blue} />
@@ -150,16 +154,16 @@ const Red = props => (
 const Green = props => (
   <div className="green" onLoad={scroll.scrollMore(4700)}>
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
-      <p><Link to="/blue" style={{ textDecoration: 'none', color: 'black' }}><img src={greenScreen} alt="First" /></Link></p>
+      <p><Link to="/blue" style={{ textDecoration: 'none', color: 'black' }}><img src={greenScreen} alt="Green" /></Link></p>
     </Slide>
   </div>
 );
 
-//Green component
+//Blue component
 const Blue = props => (
   <div className="blue" onLoad={scroll.scrollMore(4700)}>
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
-      <p><Link to="/result" style={{ textDecoration: 'none', color: 'black' }}><img src={blueScreen} alt="First" /></Link></p>
+      <p><Link to="/result" style={{ textDecoration: 'none', color: 'black' }}><img src={blueScreen} alt="Blue" /></Link></p>
     </Slide>
   </div>
 );
