@@ -141,7 +141,7 @@ const Home = props => (
   <div className="home">
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
       <Link to="/red" style={{ textDecoration: 'none', color: 'black' }}>
-        <Button variant="extendedfab" color="black" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%', color: '#FFFFFF',backgroundColor: '#000000'}} fontSize="large">
+        <Button variant="extendedfab" color="black" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '100%', color: '#FFFFFF',backgroundColor: '#000000'}} fontSize="large">
           create
         </Button>
       </Link>
@@ -181,7 +181,7 @@ const Result = props => (
   <div style={{ backgroundColor: "rgb(" + red + "," + green + "," + blue + ")", height: documentHeight }}>
     <Slide direction="left" in="true" mountOnEnter unmountOnExit>
       <Link to="/red" style={{ textDecoration: 'none', color: 'black' }}>
-        <Button variant="extendedfab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '130%', color: '#FFFFFF', backgroundColor: '#000000'}} fontSize="large">
+        <Button variant="extendedfab" color="secondary" aria-label="Add" className="button" style={{ padding: '30', margin: '10%', marginTop: '100%', color: '#FFFFFF', backgroundColor: '#000000'}} fontSize="large">
           rgb({red}, {green}, {blue})
         </Button>
       </Link>
